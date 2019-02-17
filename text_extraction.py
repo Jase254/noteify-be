@@ -144,7 +144,13 @@ def upload_to_bucket(in_name, counter):
     img_name = "img{}_sharp.jpg".format(str(counter))
     blob = bucket.blob(img_name)
     blob.upload_from_filename(in_name)
+
     return img_name
+
+def save_image(in_name):
+    image = Image.open(in_name)
+    out_file = open('/static/'+in_name, 'w')
+    image.save(out_file)
 
 
 def detect_document(path):
@@ -217,7 +223,9 @@ if __name__ == '__main__':
 
     in_path = "downloady.jpg"
     sharpen_image(in_path)
-    image = Image.open("downloady_sharp.jpg")
+    image = Image.open("img-16-02-22:46:00.jpg")
+
+    save_image("img-16-02-22:46:00.jpg")
 
     counter = 0
     sharp_image_name = upload_to_bucket("downloady_sharp.jpg", counter)
