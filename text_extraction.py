@@ -242,51 +242,7 @@ def downloadFullBucket(bucket):
 
     return (database, database2)
 
-
-
 if __name__ == '__main__':
-
-    local_storage = ExquisiteSushi()
-    local_storage2 = ExquisiteSushi()
-
-    database = HumongousDB()
-    database.init_connection()
-    database.init_database("Noteify")
-    database.init_collection("Images")
-    
-    database2 = HumongousDB()
-    database2.init_connection()
-    database2.init_database("Noteify2")
-    database2.init_collection("Tags")
-
-    download_from_bucket("img-16-02-22:46:00.jpg", "img-16-02-22:46:00.jpg")
-
-    in_path = "img-16-02-22:46:00.jpg"
-    sharpen_image(in_path)
-
-    save_image("img-16-02-22:46:00.jpg")
-
-    counter = 0
-    sharp_image_name = upload_to_bucket("downloady_sharp.jpg", counter)
-    counter += 1
-
-    word_list = detect_document("downloady_sharp.jpg")
-
-    pwords = processWordlist(word_list)
-    for pword in pwords:
-        local_storage.append(pword, sharp_image_name)
-        local_storage2.append(sharp_image_name, pword)
-    
-    database.insert_token(local_storage.get_memory())
-    database2.insert_token(local_storage2.get_memory())
-
-    retrieved_img_list = database.retrieve("mango")
-    retrieved_tags_list = database2.retrieve("img0_sharp.jpg")
-
-    database.clear_collection()
-    database2.clear_collection()
-    
-    database.close_connection()
-    database2.close_connection()
+    downloadFullBucket()
 
 
