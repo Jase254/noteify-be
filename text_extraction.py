@@ -241,7 +241,7 @@ if __name__ == '__main__':
 
     #print(retrieved_img_list)
     #print(retrieved_tags_list)
-
+    print(database.getDatabase())
     print(database2.getDatabase())
 
 

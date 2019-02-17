@@ -98,7 +98,11 @@ class HumongousDB:
         self.cursor = self.collection.find({})
 
         for data in self.cursor:
-            print(data)
+            if data != None:
+                for key in data:
+                    if key != '_id':
+                        database[key] = data[key]
+        return database
 
 
 

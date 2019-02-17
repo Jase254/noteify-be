@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import cross_origin
-
-from text_extraction import HumongousDB, ExquisiteSushi, text_extraction
+from HumongousDB import HumongousDB
+import ExquisiteSushi
 
 app = Flask(__name__)
 
@@ -9,7 +9,21 @@ app = Flask(__name__)
 @app.route('/')
 @cross_origin()
 def allImages():
-    return jsonify('Noteify FTW!')
+    local_storage = ExquisiteSushi()
+    local_storage2 = ExquisiteSushi()
+
+    database = HumongousDB()
+    database.init_connection()
+    database.init_database("Noteify")
+    database.init_collection("Images")
+
+    database2 = HumongousDB()
+    database2.init_connection()
+    database2.init_database("Noteify2")
+    database2.init_collection("Tags")
+
+
+    return jsonify(database2.getDatabase())
 
 @app.route('/test')
 @cross_origin()
@@ -21,3 +35,4 @@ def test():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
+   # app.run()
