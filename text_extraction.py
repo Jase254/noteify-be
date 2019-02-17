@@ -149,8 +149,8 @@ def upload_to_bucket(in_name, counter):
 
 def save_image(in_name):
     image = Image.open(in_name)
-    out_file = open('/static/'+in_name, 'w')
-    image.save(out_file)
+    #out_file = open('~/noteify-be/static/'+in_name, 'w')
+    image.save("./static/"+in_name)
 
 
 def detect_document(path):
@@ -252,8 +252,8 @@ if __name__ == '__main__':
     print(database2.getDatabase())
 
 
-    database.clear_collection()
-    database2.clear_collection()
+   # database.clear_collection()
+   # database2.clear_collection()
     
     database.close_connection()
     database2.close_connection()

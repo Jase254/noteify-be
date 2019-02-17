@@ -21,9 +21,11 @@ def allImages():
     database2.init_connection()
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
+    data = database2.getDatabase()
+    print(data)
 
 
-    return jsonify(database2.getDatabase())
+    return jsonify(data)
 
 @app.route('/test')
 @cross_origin()
