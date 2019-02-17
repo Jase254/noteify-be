@@ -236,6 +236,10 @@ def downloadFullBucket(bucket):
 
         database.insert_token(local_storage.get_memory())
         database2.insert_token(local_storage2.get_memory())
+
+    database.close_connection()
+    database2.close_connection()
+
     return (database, database2)
 
 
