@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import cross_origin
 from HumongousDB import HumongousDB
-import ExquisiteSushi
+from ExquisiteSushi import ExquisiteSushi
 
 app = Flask(__name__)
 
