@@ -218,9 +218,6 @@ def downloadFullBucket(bucket):
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
 
-    database.clear_collection()
-    database2.clear_collection()
-
     for blob in bucket.list_blobs():
         download_from_bucket(blob.name, blob.name)
         in_path = blob.name
@@ -234,8 +231,8 @@ def downloadFullBucket(bucket):
             local_storage.append(pword, in_path)
             local_storage2.append(in_path, pword)
 
-        database.insert_token(local_storage.get_memory())
-        database2.insert_token(local_storage2.get_memory())
+    database.insert_token(local_storage.get_memory())
+    database2.insert_token(local_storage2.get_memory())
 
     database.close_connection()
     database2.close_connection()

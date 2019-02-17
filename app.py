@@ -22,6 +22,16 @@ def allImages():
 
     return jsonify(data)
 
+@app.route('/browse')
+@cross_origin()
+def browse():
+    database2 = HumungousDB()
+    database2.init_connection()
+    database2.init_database("Noteify2")
+    database2.init_collection("Tags")
+    return jsonify(database2.getDatabase())
+
+
 @app.route('/test')
 @cross_origin()
 def test():
