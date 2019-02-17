@@ -228,8 +228,8 @@ def downloadFullBucket(bucket):
         pwords = processWordlist(word_list)
 
         for pword in pwords:
-            local_storage.append(pword, sharp_image_name)
-            local_storage2.append(sharp_image_name, pword)
+            local_storage.append(pword, in_path)
+            local_storage2.append(in_path, pword)
 
         database.insert_token(local_storage.get_memory())
         database2.insert_token(local_storage2.get_memory())
