@@ -218,6 +218,9 @@ def downloadFullBucket(bucket):
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
 
+    database.clear_collection()
+    database2.clear_collection()
+
     for blob in bucket.list_blobs():
         download_from_bucket(blob.name, blob.name)
         in_path = blob.name
@@ -276,8 +279,8 @@ if __name__ == '__main__':
     retrieved_img_list = database.retrieve("mango")
     retrieved_tags_list = database2.retrieve("img0_sharp.jpg")
 
-   # database.clear_collection()
-   # database2.clear_collection()
+    database.clear_collection()
+    database2.clear_collection()
     
     database.close_connection()
     database2.close_connection()
