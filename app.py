@@ -1,12 +1,14 @@
 from flask import Flask, jsonify
 from flask_cors import cross_origin
 
+from text_extraction import HumongousDB, ExquisiteSushi, text_extraction
+
 app = Flask(__name__)
 
 
 @app.route('/')
 @cross_origin()
-def hello_world():
+def allImages():
     return jsonify('Noteify FTW!')
 
 @app.route('/test')

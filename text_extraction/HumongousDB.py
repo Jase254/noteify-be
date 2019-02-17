@@ -92,4 +92,14 @@ class HumongousDB:
         #except:
          #   return None
 
+    def getDatabase(self):
+
+        database = dict()
+        self.cursor = self.collection.find({})
+
+        for data in self.cursor:
+            print(data)
+
+
+
 

@@ -239,8 +239,10 @@ if __name__ == '__main__':
     retrieved_img_list = database.retrieve("mango")
     retrieved_tags_list = database2.retrieve("img0_sharp.jpg")
 
-    print(retrieved_img_list)
-    print(retrieved_tags_list)
+    #print(retrieved_img_list)
+    #print(retrieved_tags_list)
+
+    print(database2.getDatabase())
 
 
     database.clear_collection()
