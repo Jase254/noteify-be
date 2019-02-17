@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from flask_cors import cross_origin
 from HumongousDB import HumongousDB
 from ExquisiteSushi import ExquisiteSushi
+from text_extraction import downloadFullBucket
+from google.cloud import storage
 
 app = Flask(__name__)
 
@@ -9,6 +11,9 @@ app = Flask(__name__)
 @app.route('/')
 @cross_origin()
 def allImages():
+    storage_client = storage.Client("noteify")
+    bucket = storage_client.get_bucket("noteify")
+
     local_storage = ExquisiteSushi()
     local_storage2 = ExquisiteSushi()
 
@@ -21,6 +26,9 @@ def allImages():
     database2.init_connection()
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
+
+    downloadFullBucket(database, database2, bucket)
+
     data = database2.getDatabase()
     print(data)
 

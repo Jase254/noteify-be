@@ -204,6 +204,25 @@ def processWordlist(word_list):
     words = [word for word in words if word not in stop_words]
     return words
 
+def downloadFullBucket(database, database2, bucket):
+    for blob in bucket.list_blobs():
+        download_from_bucket(blob.name, blob.name)
+        in_path = blob.name
+        sharpen_image(in_path)
+        save_image(in_path)
+
+        word_list = detect_document(in_path)
+        pwords = processWordlist(word_list)
+
+        for pword in pwords:
+            local_storage.append(pword, sharp_image_name)
+            local_storage2.append(sharp_image_name, pword)
+
+        database.insert_token(local_storage.get_memory())
+        database2.insert_token(local_storage2.get_memory())
+
+
+
 if __name__ == '__main__':
 
     local_storage = ExquisiteSushi()
@@ -237,20 +256,11 @@ if __name__ == '__main__':
         local_storage.append(pword, sharp_image_name)
         local_storage2.append(sharp_image_name, pword)
     
-    
     database.insert_token(local_storage.get_memory())
     database2.insert_token(local_storage2.get_memory())
-   # database.print_collection()
-    #database2.print_collection()
 
     retrieved_img_list = database.retrieve("mango")
     retrieved_tags_list = database2.retrieve("img0_sharp.jpg")
-
-    #print(retrieved_img_list)
-    #print(retrieved_tags_list)
-    print(database.getDatabase())
-    print(database2.getDatabase())
-
 
    # database.clear_collection()
    # database2.clear_collection()
