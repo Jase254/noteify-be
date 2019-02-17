@@ -45,6 +45,7 @@ class HumongousDB:
     '''
     def init_collection(self,name):
         self.collection = self.database[name]
+    
 
     '''
     Clears self.collection
@@ -66,18 +67,29 @@ class HumongousDB:
     def insert_token(self,data):
         self.collection.insert(data, check_keys = False)
 
-
-
     '''
     Prints various statistics of the 'Bookkeeping' collection.
     '''
     def print_collection_stats(self):
         print(self.database.command("collstats", "Images"))
-
+        print(self.database.command("collstats","Tags"))
     '''
     Takes in a query and returns postings based on the input query.
     '''
     def retrieve(self,query):
-        retrieved =  self.collection.find({},{query:1})
-       # print(retrieved[2][query])
-        return retrieved[2][query]
+        #retrieved =  self.collection.find({},{query:1})
+        self.cursor = self.collection.find({})
+        if self.cursor == None:
+            return None
+        for data in self.cursor:
+            if query in data:
+                return data[query]
+       # try:
+        #    print('\nk/v pairings: ')
+         #   for i in self.collection.find({}):
+          #      print(i)
+          #  return retrieved[query]
+        #except:
+         #   return None
+
+

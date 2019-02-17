@@ -22,7 +22,6 @@ from nltk.corpus import stopwords
 
 # Configure settings
 
-api_key = 'AIzaSyDq9Wcog6q_osyMQ-c6nXgGiGQ6tO1Nb8k'
 project_id = 'noteify'
 
 vision_client = vision.ImageAnnotatorClient()
@@ -55,7 +54,7 @@ def validate_message(message, param):
 
 
 def detect_text(bucket, filename):
-    print('Looking for text in image {}'.format(filename))
+#    print('Looking for text in image {}'.format(filename))
 
     futures = []
 
@@ -67,11 +66,11 @@ def detect_text(bucket, filename):
         text = annotations[0].description
     else:
         text = ''
-    print('Extracted text {} from image ({} chars).'.format(text, len(text)))
+#    print('Extracted text {} from image ({} chars).'.format(text, len(text)))
 
     detect_language_response = translate_client.detect_language(text)
     src_lang = detect_language_response['language']
-    print('Detected language {} for text {}.'.format(src_lang, text))
+#    print('Detected language {} for text {}.'.format(src_lang, text))
 
     # Submit a message to the bus for each target language
     for target_lang in config.get('TO_LANG', []):
@@ -107,7 +106,7 @@ def process_image(file, context):
 
     detect_text(bucket, name)
 
-    print('File {} processed.'.format(file['name']))
+#    print('File {} processed.'.format(file['name']))
 
 
 
@@ -122,17 +121,17 @@ def save_result(event, context):
     filename = validate_message(message, 'filename')
     lang = validate_message(message, 'lang')
 
-    print('Received request to save file {}.'.format(filename))
+#    print('Received request to save file {}.'.format(filename))
 
     bucket_name = config['RESULT_BUCKET']
     result_filename = '{}_{}.txt'.format(filename, lang)
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(result_filename)
 
-    print('Saving result to {} in bucket {}.'.format(result_filename,
-                                                     bucket_name))
+#    print('Saving result to {} in bucket {}.'.format(result_filename,
+#                                                     bucket_name))
     blob.upload_from_string(text)
-    print('File saved.')
+#    print('File saved.')
 
 storage_client = storage.Client("noteify")
 bucket = storage_client.get_bucket("noteify")
@@ -161,25 +160,26 @@ def detect_document(path):
     response = client.document_text_detection(image=image)
 
     word_list = []
+
     for page in response.full_text_annotation.pages:
         for block in page.blocks:
-            print('\nBlock confidence: {}\n'.format(block.confidence))
+#            print('\nBlock confidence: {}\n'.format(block.confidence))
 
             for paragraph in block.paragraphs:
-                print('Paragraph confidence: {}'.format(
-                    paragraph.confidence))
+#                print('Paragraph confidence: {}'.format(
+#                    paragraph.confidence))
 
                 for word in paragraph.words:
                     word_text = ''.join([
                         symbol.text for symbol in word.symbols
                     ])
-                    print('Word text: {} (confidence: {})'.format(
-                        word_text, word.confidence))
+#                    print('Word text: {} (confidence: {})'.format(
+#                        word_text, word.confidence))
                     word_list.append(word_text)
 
-                    for symbol in word.symbols:
-                        print('\tSymbol: {} (confidence: {})'.format(
-                            symbol.text, symbol.confidence))
+#                    for symbol in word.symbols:
+#                        print('\tSymbol: {} (confidence: {})'.format(
+#                            symbol.text, symbol.confidence))
     return word_list
 
 def processWordlist(word_list):
@@ -190,6 +190,9 @@ def processWordlist(word_list):
     # eliminate non-alphabetic words
     words = [word for word in stripped if word.isalpha()]
 
+    # only lowercase
+    words = [word.lower() for word in words]
+
     # filter out stopwords
     stop_words = set(stopwords.words('english'))
     words = [word for word in words if word not in stop_words]
@@ -198,11 +201,17 @@ def processWordlist(word_list):
 if __name__ == '__main__':
 
     local_storage = ExquisiteSushi()
+    local_storage2 = ExquisiteSushi()
 
     database = HumongousDB()
     database.init_connection()
     database.init_database("Noteify")
     database.init_collection("Images")
+    
+    database2 = HumongousDB()
+    database2.init_connection()
+    database2.init_database("Noteify2")
+    database2.init_collection("Tags")
 
     download_from_bucket("img-16-02-22:46:00.jpg", "downloady.jpg")
 
@@ -219,11 +228,25 @@ if __name__ == '__main__':
     pwords = processWordlist(word_list)
     for pword in pwords:
         local_storage.append(pword, sharp_image_name)
-
+        local_storage2.append(sharp_image_name, pword)
+    
+    
     database.insert_token(local_storage.get_memory())
+    database2.insert_token(local_storage2.get_memory())
+   # database.print_collection()
+    #database2.print_collection()
 
-    retrieved_img_list = database.retrieve("Mango")
-
+    retrieved_img_list = database.retrieve("mango")
+    retrieved_tags_list = database2.retrieve("img0_sharp.jpg")
 
     print(retrieved_img_list)
+    print(retrieved_tags_list)
+
+
+    database.clear_collection()
+    database2.clear_collection()
+    
+    database.close_connection()
+    database2.close_connection()
+
 
