@@ -14,22 +14,9 @@ def allImages():
     storage_client = storage.Client("noteify")
     bucket = storage_client.get_bucket("noteify")
 
-    local_storage = ExquisiteSushi()
-    local_storage2 = ExquisiteSushi()
+    db, db2 = downloadFullBucket(bucket)
 
-    database = HumongousDB()
-    database.init_connection()
-    database.init_database("Noteify")
-    database.init_collection("Images")
-
-    database2 = HumongousDB()
-    database2.init_connection()
-    database2.init_database("Noteify2")
-    database2.init_collection("Tags")
-
-    downloadFullBucket(database, database2, bucket)
-
-    data = database2.getDatabase()
+    data = db2.getDatabase()
     print(data)
 
 

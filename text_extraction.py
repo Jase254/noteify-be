@@ -204,7 +204,20 @@ def processWordlist(word_list):
     words = [word for word in words if word not in stop_words]
     return words
 
-def downloadFullBucket(database, database2, bucket):
+def downloadFullBucket(bucket):
+    local_storage = ExquisiteSushi()
+    local_storage2 = ExquisiteSushi()
+
+    database = HumongousDB()
+    database.init_connection()
+    database.init_database("Noteify")
+    database.init_collection("Images")
+
+    database2 = HumongousDB()
+    database2.init_connection()
+    database2.init_database("Noteify2")
+    database2.init_collection("Tags")
+
     for blob in bucket.list_blobs():
         download_from_bucket(blob.name, blob.name)
         in_path = blob.name
@@ -220,6 +233,7 @@ def downloadFullBucket(database, database2, bucket):
 
         database.insert_token(local_storage.get_memory())
         database2.insert_token(local_storage2.get_memory())
+    return (database, database2)
 
 
 
