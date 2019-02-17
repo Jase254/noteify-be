@@ -8,7 +8,7 @@ from PIL import Image, ImageEnhance
 
 #import cloudstorage as gcs
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]= "/Users/bgalk/Desktop/Noteify-7ee05830ab6d.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]= "Noteify-7ee05830ab6d.json"
 
 from google.cloud import pubsub_v1
 from google.cloud import storage
@@ -30,7 +30,7 @@ translate_client = translate.Client()
 publisher = pubsub_v1.PublisherClient()
 storage_client = storage.Client()
 
-with open('/Users/bgalk/Desktop/console.json') as f:
+with open('console.json') as f:
     data = f.read()
 config = json.loads(data)
 
@@ -139,11 +139,13 @@ bucket = storage_client.get_bucket("noteify")
 
 def download_from_bucket(in_name, out_name):
     blob = bucket.blob(in_name)
-    blob.download_to_filename("/Users/bgalk/Desktop/{}".format(out_name))
+    blob.download_to_filename("{}".format(out_name))
 
 def upload_to_bucket(in_name, counter):
-    blob = bucket.blob("img{}_sharp.jpg".format(str(counter)))
+    img_name = "img{}_sharp.jpg".format(str(counter))
+    blob = bucket.blob(img_name)
     blob.upload_from_filename(in_name)
+    return img_name
 
 
 def detect_document(path):
@@ -204,28 +206,24 @@ if __name__ == '__main__':
 
     download_from_bucket("img-16-02-22:46:00.jpg", "downloady.jpg")
 
-    in_path = "/Users/bgalk/Desktop/downloady.jpg"
+    in_path = "downloady.jpg"
     sharpen_image(in_path)
-    image = Image.open("/Users/bgalk/Desktop/downloady_sharp.jpg")
+    image = Image.open("downloady_sharp.jpg")
 
     counter = 0
-    upload_to_bucket("/Users/bgalk/Desktop/downloady_sharp.jpg", counter)
+    sharp_image_name = upload_to_bucket("downloady_sharp.jpg", counter)
     counter += 1
 
-    word_list = detect_document("/Users/bgalk/Desktop/downloady_sharp.jpg")
-    for word in word_list:
-        print(word)
-        local_storage.append(word, image)
-    print('\n\n')
+    word_list = detect_document("downloady_sharp.jpg")
 
     pwords = processWordlist(word_list)
     for pword in pwords:
-        print(pword)
+        local_storage.append(pword, sharp_image_name)
 
     database.insert_token(local_storage.get_memory())
 
-    database.print_collection_stats()
+    retrieved_img_list = database.retrieve("Mango")
 
-    database.close_connection()
 
+    print(retrieved_img_list)
 

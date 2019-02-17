@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "noteify",
+  "private_key_id": "7ee05830ab6d0330f6aa659b9a8c50b5bf90b3fd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/EnzeRjmzhVNX\nqkYPXAoMPLoPACRxDuyzI4x7Z670WwI8zZ9vT0oEG2prEt0SMrA4k7CzIdsgrrhK\nxcs7bMJORfe8pOo0Fjnmf3j+56D/c0BWS/QDaGnuuAw0pXma4gLDQVDC7TRqj0Em\nxaFa5xgLx49eLEwMR19oJCwQJun03+iFmEyzZo5KUoWCvSaYffIkwZuA4UTthCKl\nb5t5LZHue4ZKLMSC73UIPhpVidSzxcJzpkqNz6qiRhSUTuFZOnMRlGKSNHfw5nhU\n0qpRkucAC2XNjpCk1694rw6+ftUQ7/elHNRgCNYP/kNLBdFBIRLhyI1fhiXJDKai\ngc8weQOxAgMBAAECggEAVU9e2ytFpga4MGMBBuiUP+R5OitZGfWM72rG1W50qftc\nY2N3dQ5UwMKw3/+7Ht3s2kXu1fwex1fbRt9LH0wu8R3CP8LuIrVtwqFVl5I5yvRd\nXGprF35uFbytDnB3fBS/IQivk2ivR4iQkUwZ/+lATjoao/RpO+4+BdRorAmD2eW9\nZUX4CkGMqiVQPpQ4cA4HuCtjESfaKaWGwxWzuoYd+J3thpLM7oApw4K8ScCV0ZOK\nlRJ6uYv0LwnfJj9wxuWtTPFEij03AiunTVQx+28+yix0ATaxOED0YqZzexlXW+1+\n997QyQRt1LtnxzX4/f1EHBALMCRCBQQZop6ukYg35QKBgQDkcNGb4AFWWDE1mv6i\nZNiOeRXSzSP+ilnmGS+cKsiCs4sR7ZV5Hr2HnuWEqXydlhWYUWL1hW/x3V0M0dnK\niQh+N5U0m0R9G5v5iPmv9v2r6zlb90/3/LJ8FBTgsdPsHV+2qtUi8y9H852BMFct\n69ciG6Z54l0WQ35U9bCaRw23WwKBgQDWH5Po4K4Cd39riPj+Wcl0PTmDY5VH++nw\nCucpwyz72pbQBxgrWbjJ3igBCtrwfm4DXv85Ytk6ZGR7z995kTnI8cVsl9ktm6yO\nlo3Sl/RAAxNfjWDGNmimFcbOfWFspTyAhG9axzBEKghobFQe5LlSO7Uf4mgqJpqJ\nFX6QPTeq4wKBgQC87jnNixRQDxyT0x6pvHIGU0qjT5pnWJFFZqsjo5a10jxAlZg7\n1hq2Yco9T9eKlahCk30exj9xb70Xby+K/I6TpPC303pvZjg3xvuKduISH7cOwpnW\n5Z3QVON3eltlOl4Au4UPJMWD4o3vXMWdayJASVIEGB0Y3rVLGu/2iLFlZQKBgFZ4\nViD7awov+9MPc44z8Djy6KD4vDZfsy9vF78zxJzIv5Ku6sHG7+sFvh39pkDsrbzK\nxkMEejksha/CWLsdPLq7eEDMabYTYfILNqbPGqInG9HApE4ndsdrj+eflpJrgC1e\nTiHYwtMkLlUNOkNnlrdwyUphAjPTdyDY/018i1iFAoGAArMUifJfsI1+SB/THeVG\nM3p5TrBZpJXIMM+ogV2eiMATSvZT2txeOc4ltZPlPveBBfJlu2rpdycCWcTONwXW\nDS6ss/ehQ4w2l14yvGw4UByFmmYFEuH4vIhG9WoCZcm6bf7jD9Xvc6i7Z6+6WL3I\nRiYGbsT+4UkuoHX+IBH4zmk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "brett-531@noteify.iam.gserviceaccount.com",
+  "client_id": "105433475548110361398",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/brett-531%40noteify.iam.gserviceaccount.com"
+}

@@ -64,7 +64,7 @@ class HumongousDB:
     Insert a single data to the self.collection.
     '''
     def insert_token(self,data):
-        self.collection.insert(data)
+        self.collection.insert(data, check_keys = False)
 
 
 
@@ -78,4 +78,6 @@ class HumongousDB:
     Takes in a query and returns postings based on the input query.
     '''
     def retrieve(self,query):
-        return self.collection.find({"Token":query})
+        retrieved =  self.collection.find({},{query:1})
+       # print(retrieved[2][query])
+        return retrieved[2][query]
