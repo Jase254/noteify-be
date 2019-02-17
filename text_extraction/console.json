@@ -1,0 +1,7 @@
+{
+"RESULT_TOPIC": "notes",
+"RESULT_BUCKET": "noteify",
+"TRANSLATE_TOPIC": "notes",
+"TRANSLATE": false,
+"TO_LANG": ["en", "fr", "es", "ja", "ru"]
+}
