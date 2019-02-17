@@ -19,6 +19,7 @@ from HumongousDB import HumongousDB
 from ExquisiteSushi import ExquisiteSushi
 
 from nltk.corpus import stopwords
+from autocorrect import spell
 
 # Configure settings
 
@@ -202,6 +203,10 @@ def processWordlist(word_list):
     # filter out stopwords
     stop_words = set(stopwords.words('english'))
     words = [word for word in words if word not in stop_words]
+
+    # autocorrect some words
+    words = [spell(word) for word in words if word != spell(word)]
+    
     return words
 
 def downloadFullBucket(bucket):
