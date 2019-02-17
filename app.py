@@ -25,7 +25,7 @@ def allImages():
 @app.route('/browse')
 @cross_origin()
 def browse():
-    database2 = HumungousDB()
+    database2 = HumongousDB()
     database2.init_connection()
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
