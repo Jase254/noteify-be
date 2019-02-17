@@ -41,9 +41,10 @@ def sharpen_image(in_path):
     factor = 2.0
     enhanced = enhancer.enhance(factor)
 
-    out_path = in_path[:-4] + "_sharp.jpg"
-    fp = open(out_path, 'w')
+    out_path = in_path
+    fp = open(out_path, 'w+b')
     enhanced.save(fp)
+
 
 def validate_message(message, param):
     var = message.get(param)
@@ -206,7 +207,7 @@ def processWordlist(word_list):
 
     # autocorrect some words
     words = [spell(word) for word in words if word != spell(word)]
-    
+
     return words
 
 def downloadFullBucket(bucket):
@@ -227,7 +228,6 @@ def downloadFullBucket(bucket):
         download_from_bucket(blob.name, blob.name)
         in_path = blob.name
         sharpen_image(in_path)
-        save_image(in_path)
 
         word_list = detect_document(in_path)
         pwords = processWordlist(word_list)
