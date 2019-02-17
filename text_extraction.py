@@ -219,11 +219,10 @@ if __name__ == '__main__':
     database2.init_database("Noteify2")
     database2.init_collection("Tags")
 
-    download_from_bucket("img-16-02-22:46:00.jpg", "downloady.jpg")
+    download_from_bucket("img-16-02-22:46:00.jpg", "img-16-02-22:46:00.jpg")
 
-    in_path = "downloady.jpg"
+    in_path = "img-16-02-22:46:00.jpg"
     sharpen_image(in_path)
-    image = Image.open("img-16-02-22:46:00.jpg")
 
     save_image("img-16-02-22:46:00.jpg")
 
