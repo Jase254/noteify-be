@@ -19,7 +19,7 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.0
-nltk==3.4
+nltk==3.4.5
 Pillow==5.4.1
 pkg-resources==0.0.0
 protobuf==3.6.1
